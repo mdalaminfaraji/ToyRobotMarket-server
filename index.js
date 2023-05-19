@@ -26,7 +26,7 @@ const client = new MongoClient(uri, {
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-     client.connect((err)=>{
+    await client.connect((err)=>{
         if(err){
             console.error(err);
             return;
@@ -34,10 +34,22 @@ async function run() {
      });
 
      const toyRobotsCollection=client.db('toyRobots').collection('toys');
+     app.get('/toyRobots', async(req, res)=>{
+        const result=await toyRobotsCollection.find().toArray();
+        res.send(result);
+     })
 
      app.post('/toyRobots', async(req, res)=>{
-        
+       
+        const toy=req.body;
+     
+        console.log(toy);
+        const result=await toyRobotsCollection.insertOne(toy);
+        res.send(result);
+
      })
+
+
 
 
 
