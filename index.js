@@ -1,7 +1,7 @@
 const express=require('express');
 const cors=require('cors');
 require('dotenv').config();
-const { MongoClient, ServerApiVersion } = require('mongodb');
+const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app=express();
 const port=process.env.PORT ||5000;
 
@@ -31,17 +31,49 @@ async function run() {
             console.error(err);
             return;
         }
-     });
+     }); 
 
      const toyRobotsCollection=client.db('toyRobots').collection('toys');
+      const indexKeys={toyName:1};
+      const indexOptions={name:'toyName'};
+      const result=await toyRobotsCollection.createIndex(indexKeys, indexOptions);
+
+
+      app.get('/myToyRobots/:email', (req,res)=>{
+        console.log(req.params.email);
+      })
+
+
+     app.get('/toyRobotsText/:text', async(req, res)=>{
+        const searchText=req.params.text;
+        console.log(searchText);
+       
+             const result=await toyRobotsCollection.find({
+            toyName:{$regex:searchText, $options:'i'}
+        }).toArray();
+         res.send(result);
+      
+       
+       
+     })
+
+
      app.get('/toyRobots', async(req, res)=>{
         const result=await toyRobotsCollection.find().toArray();
         res.send(result);
      })
 
+     app.get('/toyRobots/:id',async(req, res)=>{
+        console.log(req.params.id);
+        const id=req.params.id;
+        const query={ _id: new ObjectId(id) };
+        const result=await toyRobotsCollection.findOne(query);
+        res.send(result);
+     })
+
      app.post('/toyRobots', async(req, res)=>{
        
-        const toy=req.body;
+        const toy=req.body; 
      
         console.log(toy);
         const result=await toyRobotsCollection.insertOne(toy);
