@@ -45,29 +45,19 @@ async function run() {
         res.send(result);
       })
 
-    //  app.get('/toyRobots', async(req, res)=>{
-    //     const { sort } = req.query;
-    //     const sortOptions = {};
-    //     if (sort === 'ascending') {
-    //         sortOptions.price = 1;
-    //       } else if (sort === 'descending') {
-    //         sortOptions.price = -1;
-    //       } 
-
-    //     console.log(sort);
-    //     const toys=await toyRobotsCollection.find().sort(sortOptions);
-       
-    //     res.send(toys);
-    //  })
+   
     app.get('/descending', async (req, res) => {
-        try {
-          const toyRobots = await toyRobotsCollection.find().sort({ price: -1 });
-          console.log(toyRobots);
+       
+          const toyRobots = await toyRobotsCollection.find().sort({price: -1}).toArray();
           res.send(toyRobots);
-        } catch (error) {
-          console.error('Error fetching toy robots:', error);
-          res.status(500).json({ error: 'An error occurred while fetching toy robots' });
-        }
+      
+      });
+   
+    app.get('/ascending', async (req, res) => {
+       
+          const toyRobots = await toyRobotsCollection.find().sort({price: 1}).toArray();
+          res.send(toyRobots);
+      
       });
       
      app.get('/toyRobotsText/:text', async(req, res)=>{
