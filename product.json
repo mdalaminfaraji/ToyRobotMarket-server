@@ -1,0 +1,56 @@
+[
+ 
+    {
+        "id":1,
+        "image":"https://i.ibb.co/vQLB7TH/Cozmo.jpg",
+        "Name":"Cozmo Robot",
+        "price":345,
+        "Ratting":4.5,
+        "detail":"Cozmo is a small, programmable robot "
+    },
+    {
+        "id":2,
+        "image":"https://i.ibb.co/YBTgVKT/Wow-Wee-Mi-P.webp",
+        "Name":"Wow-Wee-Mi-P Robot",
+        "price":459,
+        "Ratting":4.5,
+        "detail":" It has a unique dual-wheel balancing mechanism  "
+    },
+    {
+        "id":3,
+        "image":"https://i.ibb.co/NWnBcSz/wowMip.jpg",
+        "Name":"WowWee MiP Robot",
+        "price":345,
+        "Ratting":4.5,
+        "detail":"WowWee MiP is a balancing robot that can navigate its surroundings, dance,"
+    },
+    {
+        "id":4,
+        "image":"https://i.ibb.co/6JsPs9n/Sphero-R2-D2.jpg",
+        "Name":"Sphero-R2-D2 Robot",
+        "price":123,
+        "Ratting":4.5,
+        "detail":"Sphero R2-D2 is a robotic replica of the iconic Star Wars character "
+    },
+    {
+        "id":5,
+        "image":"https://i.ibb.co/2dN9Y5K/LEGO-Mindstorms.jpg",
+        "Name":"LEGO-Mindstorms Robot",
+        "price":350,
+        "Ratting":4.5,
+        "detail":" LEGO Mindstorms is a robotics kit  "
+    },
+    {
+        "id":6,
+        "image":"https://i.ibb.co/nz6MdPr/Dash-and-Dot.jpg",
+        "Name":"Dash-and-Dot Robot",
+        "price":450,
+        "Ratting":4.5,
+        "detail":"Dash and Dot are a pair of programmable robots  "
+    }
+]
+
+
+
+
+

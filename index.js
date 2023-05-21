@@ -1,5 +1,6 @@
 const express=require('express');
 const cors=require('cors');
+const products=require('./product.json');
 require('dotenv').config();
 const { MongoClient, ServerApiVersion, ObjectId } = require('mongodb');
 const app=express();
@@ -20,23 +21,18 @@ const client = new MongoClient(uri, {
   },
   useNewUrlParser:true,
   useUnifiedTopology:true,
-  maxPoolSize:10,
+  maxPoolSize:10
 });
 
 async function run() {
   try {
     // Connect the client to the server	(optional starting in v4.7)
-    await client.connect((err)=>{
-        if(err){
-            console.error(err);
-            return;
-        }
-     }); 
+    
 
      const toyRobotsCollection=client.db('toyRobots').collection('toys');
-      const indexKeys={toyName:1};
-      const indexOptions={name:'toyName'};
-      const result=await toyRobotsCollection.createIndex(indexKeys, indexOptions);
+    //   const indexKeys={toyName:1};
+    //   const indexOptions={name:'toyName'};
+    //   const result=await toyRobotsCollection.createIndex(indexKeys, indexOptions);
 
 
       app.get('/myToyRobots/:email', async(req,res)=>{
@@ -65,7 +61,7 @@ async function run() {
         console.log(searchText);
        
              const result=await toyRobotsCollection.find({
-            toyName:{$regex:searchText, $options:'i'}
+            toyName:searchText
         }).toArray();
          res.send(result);
       
@@ -123,7 +119,7 @@ async function run() {
 
 
     // Send a ping to confirm a successful connection
-    await client.db("admin").command({ ping: 1 });
+  
     console.log("Pinged your deployment. You successfully connected to MongoDB!");
   } finally {
     // Ensures that the client will close when you finish/error
@@ -137,6 +133,9 @@ run().catch(console.dir);
 
 app.get('/', (req, res) => {
     res.send('Robot server is running........');
+})
+app.get('/products', (req, res)=>{
+    res.send(products);
 })
 
 app.listen(port, () => {
